@@ -2661,6 +2661,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe68e32a3939447b5190efb6156b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  units:
+  - {fileID: 5392777681050664804, guid: cd0c174762763c64e997a346f7d47572, type: 3}
+  - {fileID: 3278228420507946598, guid: 118339cbdb1a693488236542e998e850, type: 3}
+  - {fileID: 4440183786819431593, guid: 8885bcb67cc85eb45a29b28f51f7f82c, type: 3}
+  - {fileID: 6060735555739142343, guid: 7135449eb0f9a8f46bc1da1aa4636e10, type: 3}
+  - {fileID: 2642094870834351254, guid: b1007a7aaf7af814fb521594de41fd8d, type: 3}
+  - {fileID: 6459890774845570308, guid: 7b1ebb2a4f522864cbf7cfb8b35bddd9, type: 3}
+  - {fileID: 3524233786313068657, guid: b3614b54d9e320b45b51a88fdd9aba01, type: 3}
+  - {fileID: 1575915205989998685, guid: 57b0e12ec2bf2f94394755db85fc3543, type: 3}
 --- !u!4 &185578365
 Transform:
   m_ObjectHideFlags: 0
@@ -2821,7 +2830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0be2c5749820d54db3f29e615ac3bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
   moveSpeed: 0
   attackPerSec: 0
   attackRange: 0
@@ -13350,8 +13358,7 @@ MonoBehaviour:
   - {fileID: 3524233786313068657, guid: b3614b54d9e320b45b51a88fdd9aba01, type: 3}
   - {fileID: 1575915205989998685, guid: 57b0e12ec2bf2f94394755db85fc3543, type: 3}
   unitStats:
-  - Name: 
-    moveSpeed: 10
+  - moveSpeed: 10
     attackPerSec: 1
     attackRange: 10
     damage: 8
@@ -13363,8 +13370,7 @@ MonoBehaviour:
     unitCost: 50
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: 
-    moveSpeed: 5
+  - moveSpeed: 5
     attackPerSec: 1
     attackRange: 5
     damage: 8
@@ -13376,8 +13382,7 @@ MonoBehaviour:
     unitCost: 100
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: 
-    moveSpeed: 15
+  - moveSpeed: 15
     attackPerSec: 1
     attackRange: 10
     damage: 13
@@ -13389,8 +13394,7 @@ MonoBehaviour:
     unitCost: 200
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: 
-    moveSpeed: 5
+  - moveSpeed: 5
     attackPerSec: 1
     attackRange: 5
     damage: 10
@@ -13402,8 +13406,7 @@ MonoBehaviour:
     unitCost: 400
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: 
-    moveSpeed: 15
+  - moveSpeed: 15
     attackPerSec: 1
     attackRange: 20
     damage: 20
@@ -63353,7 +63356,6 @@ MonoBehaviour:
     m_Bits: 8
   extraSkillRangeMin: {x: 0, y: 0}
   extraSkillRangeMax: {x: 0, y: 0}
-  home: {fileID: 1641566672}
 --- !u!1001 &1321737449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68245,7 +68247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0be2c5749820d54db3f29e615ac3bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
   moveSpeed: 0
   attackPerSec: 0
   attackRange: 0
@@ -69611,8 +69612,7 @@ MonoBehaviour:
   - {fileID: 3278228420507946598, guid: 118339cbdb1a693488236542e998e850, type: 3}
   - {fileID: 4440183786819431593, guid: 8885bcb67cc85eb45a29b28f51f7f82c, type: 3}
   unitStats:
-  - Name: 
-    moveSpeed: 10
+  - moveSpeed: 10
     attackPerSec: 1
     attackRange: 10
     damage: 6
@@ -69624,8 +69624,7 @@ MonoBehaviour:
     unitCost: 0
     spawnStartTime: 0
     spawnInterval: 7
-  - Name: 
-    moveSpeed: 15
+  - moveSpeed: 15
     attackPerSec: 1
     attackRange: 10
     damage: 10
@@ -69637,8 +69636,7 @@ MonoBehaviour:
     unitCost: 0
     spawnStartTime: 60
     spawnInterval: 10
-  - Name: 
-    moveSpeed: 10
+  - moveSpeed: 10
     attackPerSec: 1
     attackRange: 20
     damage: 20

@@ -9,11 +9,12 @@ public class PlayerSpawner : EnemySpawner
 
     public void Spawn(int num)
     {
-        Unit unit = Instantiate(unitPrefabs[num]);
-        PutStats(unit, unitStats[num]);
-        PlayerUnitListUp(unit);
-        AllUnitListUp(unit);
-        GameManager.Instance.player.coins -= unit.unitCost;
+        var obj = poolManager.Pop(unitPrefabs[num].name);
+
+        PutStats(obj, unitStats[num]);
+        PlayerUnitListUp(obj);
+        AllUnitListUp(obj);
+        GameManager.Instance.player.coins -= obj.unitCost;
         UIManager.Instance.SpawnEnDisAble();
     }
 

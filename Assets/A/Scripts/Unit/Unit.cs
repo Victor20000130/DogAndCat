@@ -9,8 +9,9 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    private PoolManager poolManager;
+
     private Monster monster;
-    public string Name;
     public float moveSpeed;
     public float attackPerSec;
     public float attackRange;
@@ -18,7 +19,7 @@ public class Unit : MonoBehaviour
     public float maxHp;
     public float hp;
     public bool singleAttackType;
-    private bool isBattle = false;
+    private bool isBattle;
 
     public int unitCost;
 
@@ -31,35 +32,33 @@ public class Unit : MonoBehaviour
     public float hpAmount { get { return hp / maxHp; } }
     public Slider hpBar;
 
-    private BoxCollider2D hitBox;
+    private BoxCollider2D hurtBox;
 
     public TMP_Text tMP_Text;
 
-    private void Awake()
+    private void OnEnable()
     {
+        hp = maxHp;
+        isBattle = false;
 
-        hitBox = GetComponent<BoxCollider2D>();
+        hurtBox = GetComponent<BoxCollider2D>();
+        hurtBox.enabled = true;
         if (gameObject.CompareTag("Unit"))
         {
             monster = GetComponent<Monster>();
             monster.SetState(MonsterState.Run);
         }
+        poolManager = FindAnyObjectByType<PoolManager>();
     }
 
-    private void Start()
-    {
-
-    }
 
 
     private float preDamageTime = 0;
     private void Update()
     {
-
-
         Move();
-
-        if (hitBox.enabled == true)
+        hpBar.value = hpAmount;
+        if (hurtBox.enabled == true)
         {
             if (preDamageTime + attackPerSec < Time.time)
             {
@@ -67,8 +66,6 @@ public class Unit : MonoBehaviour
                 preDamageTime = Time.time;
             }
         }
-
-
     }
 
     private void Battle()
@@ -120,7 +117,6 @@ public class Unit : MonoBehaviour
         if (singleAttackType)
         {
             Unit target = null;
-
             foreach (var coll in colls)
             {
                 if (target == null)
@@ -214,40 +210,39 @@ public class Unit : MonoBehaviour
     {
         if (hp <= 0)
         {
-            hitBox.enabled = false;
+            hurtBox.enabled = false;
             if (gameObject.CompareTag("Unit"))
                 monster.SetState(MonsterState.Death);
-            gameObject.SetActive(false);
+
+            StartCoroutine(Despawn(this, 2f));
             if (gameObject.CompareTag("Base"))
             {
                 if (gameObject.layer == 3)
                 {
-                    //player win
                     UIManager.Instance.battleResult[0].SetActive(true);
                 }
                 if (gameObject.layer == 6)
                 {
-                    //player lose
                     UIManager.Instance.battleResult[1].SetActive(true);
                 }
                 Time.timeScale = 0;
-                new WaitForSeconds(5f);
                 GameManager.Instance.GameOver();
             }
-
         }
-
     }
-
     public void TakeDamage(float damage)
     {
         hp -= damage;
-        hpBar.value = hpAmount;
+        isBattle = true;
         if (transform.CompareTag("Base"))
         {
             tMP_Text.text = hp.ToString() + " / " + maxHp.ToString();
         }
         Die();
     }
-
+    public IEnumerator Despawn(Unit unit, float t)
+    {
+        yield return new WaitForSeconds(t);
+        poolManager.Push(unit);
+    }
 }

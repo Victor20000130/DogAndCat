@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Unit[] unitPrefabs;
     public UnitStats[] unitStats;
 
+    protected PoolManager poolManager;
 
     public bool isEnemySpawner;
 
@@ -17,7 +18,10 @@ public class EnemySpawner : MonoBehaviour
     public float spawnXAxis;
 
 
-
+    private void Awake()
+    {
+        poolManager = FindAnyObjectByType<PoolManager>();
+    }
 
     private void Update()
     {
@@ -35,17 +39,16 @@ public class EnemySpawner : MonoBehaviour
         {
             if (unitStats[i].spawnStartTime <= Time.time)
             {
-                Unit unit = Instantiate(unitPrefabs[i]);
-                PutStats(unit, unitStats[i]);
-                EnemiseListUp(unit);
-                AllUnitListUp(unit);
+                var obj = poolManager.Pop(unitPrefabs[i].name);
+                PutStats(obj, unitStats[i]);
+                EnemiseListUp(obj);
+                AllUnitListUp(obj);
             }
         }
     }
 
     protected virtual void PutStats(Unit unit, UnitStats stats)
     {
-        unit.name = stats.Name;
         unit.moveSpeed = stats.moveSpeed;
         unit.attackPerSec = stats.attackPerSec;
         unit.attackRange = stats.attackRange;
@@ -73,6 +76,8 @@ public class EnemySpawner : MonoBehaviour
     {
         GameManager.Instance.units.Add(unit);
     }
+
+
 }
 
 

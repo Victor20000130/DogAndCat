@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UnitStats
 {
-    public string Name;
+
     public float moveSpeed;
     public float attackPerSec;
     public float attackRange;

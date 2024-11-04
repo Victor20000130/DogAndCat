@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(new Vector2(25, -10), new Vector2(50, 20));
+        Gizmos.DrawWireCube(new Vector2(-25, -10), new Vector2(50, 20));
     }
 
 
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     {
         extraSkillColldown = 60;
         UIManager.Instance.SpawnEnDisAble();
-        Collider2D[] colls = Physics2D.OverlapBoxAll(new Vector2(25, -10), new Vector2(50, 20), 0, extraSkillTarget);
+        Collider2D[] colls = Physics2D.OverlapBoxAll(new Vector2(-25, -10), new Vector2(50, 20), 0, extraSkillTarget);
 
         foreach (var coll in colls)
         {
