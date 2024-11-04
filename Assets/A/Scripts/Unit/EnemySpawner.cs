@@ -17,13 +17,6 @@ public class EnemySpawner : MonoBehaviour
     public float spawnXAxis;
 
 
-    private void Start()
-    {
-        for (int i = 0; i < unitPrefabs.Length; i++)
-        {
-            PoolManager.Instance.CreatePool(unitPrefabs[i].gameObject, 20);
-        }
-    }
 
 
     private void Update()
@@ -42,8 +35,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (unitStats[i].spawnStartTime <= Time.time)
             {
-                GameObject unitObj = PoolManager.Instance.GetObject(unitPrefabs[i].name, transform.position, transform.rotation);
-                Unit unit = unitObj.GetComponent<Unit>();
+                Unit unit = Instantiate(unitPrefabs[i]);
                 PutStats(unit, unitStats[i]);
                 EnemiseListUp(unit);
                 AllUnitListUp(unit);

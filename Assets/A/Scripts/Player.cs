@@ -26,17 +26,10 @@ public class Player : MonoBehaviour
     public Vector2 extraSkillRangeMin;
     public Vector2 extraSkillRangeMax;
 
-    public GameObject home;
-
-    private void Awake()
-    {
-
-    }
 
     private void Start()
     {
         StartCoroutine(CoinTimer());
-        //StartCoroutine(CoinTimer());
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public class Player : MonoBehaviour
             if (coins > coinsLimit)
             {
                 coins = coinsLimit;
-
-
             }
             extraSkillColldown--;
         }
@@ -107,6 +98,7 @@ public class Player : MonoBehaviour
 
         foreach (var coll in colls)
         {
+            if (coll.CompareTag("Base")) continue;
             coll.GetComponent<Unit>().TakeDamage(100);
         }
 

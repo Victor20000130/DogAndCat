@@ -13350,7 +13350,7 @@ MonoBehaviour:
   - {fileID: 3524233786313068657, guid: b3614b54d9e320b45b51a88fdd9aba01, type: 3}
   - {fileID: 1575915205989998685, guid: 57b0e12ec2bf2f94394755db85fc3543, type: 3}
   unitStats:
-  - Name: nu
+  - Name: 
     moveSpeed: 10
     attackPerSec: 1
     attackRange: 10
@@ -13363,7 +13363,7 @@ MonoBehaviour:
     unitCost: 50
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: wh
+  - Name: 
     moveSpeed: 5
     attackPerSec: 1
     attackRange: 5
@@ -13376,7 +13376,7 @@ MonoBehaviour:
     unitCost: 100
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: ba
+  - Name: 
     moveSpeed: 15
     attackPerSec: 1
     attackRange: 10
@@ -13389,7 +13389,7 @@ MonoBehaviour:
     unitCost: 200
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: cl
+  - Name: 
     moveSpeed: 5
     attackPerSec: 1
     attackRange: 5
@@ -13402,7 +13402,7 @@ MonoBehaviour:
     unitCost: 400
     spawnStartTime: 0
     spawnInterval: 0
-  - Name: jin
+  - Name: 
     moveSpeed: 15
     attackPerSec: 1
     attackRange: 20
@@ -69611,7 +69611,7 @@ MonoBehaviour:
   - {fileID: 3278228420507946598, guid: 118339cbdb1a693488236542e998e850, type: 3}
   - {fileID: 4440183786819431593, guid: 8885bcb67cc85eb45a29b28f51f7f82c, type: 3}
   unitStats:
-  - Name: nabi
+  - Name: 
     moveSpeed: 10
     attackPerSec: 1
     attackRange: 10
@@ -69624,7 +69624,7 @@ MonoBehaviour:
     unitCost: 0
     spawnStartTime: 0
     spawnInterval: 7
-  - Name: coke
+  - Name: 
     moveSpeed: 15
     attackPerSec: 1
     attackRange: 10
@@ -69637,7 +69637,7 @@ MonoBehaviour:
     unitCost: 0
     spawnStartTime: 60
     spawnInterval: 10
-  - Name: black
+  - Name: 
     moveSpeed: 10
     attackPerSec: 1
     attackRange: 20
