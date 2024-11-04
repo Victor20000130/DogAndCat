@@ -9,19 +9,12 @@ public class GameManager : SingletonManager<GameManager>
     internal List<Unit> units = new List<Unit>();
     internal List<Unit> enemise = new List<Unit>();
     internal List<Unit> p_unit = new List<Unit>();
-
-
     internal Player player;
-
     internal EnemySpawner enemySpawner;
     internal PlayerSpawner playerSpawner;
     protected override void Awake()
     {
         base.Awake();
-    }
-    private void Start()
-    {
-
     }
     private void Update()
     {
@@ -42,7 +35,6 @@ public class GameManager : SingletonManager<GameManager>
     {
         SceneManager.LoadScene("GameScene");
     }
-
     public void GameOver()
     {
         units.Clear();
@@ -50,5 +42,4 @@ public class GameManager : SingletonManager<GameManager>
         p_unit.Clear();
         SceneManager.LoadScene("GameStartScene");
     }
-
 }

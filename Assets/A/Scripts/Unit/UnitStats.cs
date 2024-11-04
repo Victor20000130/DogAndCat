@@ -7,7 +7,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UnitStats
 {
-
     public float moveSpeed;
     public float attackPerSec;
     public float attackRange;
@@ -18,7 +17,6 @@ public class UnitStats
     public Vector2 offSet;
     public Vector2 offSetSize;
     public int unitCost;
-
     public float spawnStartTime;
     public float spawnInterval;
 }

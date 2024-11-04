@@ -10,32 +10,23 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
     private PoolManager poolManager;
-
     private Monster monster;
     public float moveSpeed;
     public float attackPerSec;
-    public float attackRange;
     public float damage;
     public float maxHp;
     public float hp;
     public bool singleAttackType;
     private bool isBattle;
-
     public int unitCost;
-
     public LayerMask targetLayer;
     public Vector2 offset;
     public Vector2 offsetSize;
-
     public BoxCollider2D colloffset;
-
-    public float hpAmount { get { return hp / maxHp; } }
     public Slider hpBar;
-
     private BoxCollider2D hurtBox;
-
     public TMP_Text tMP_Text;
-
+    public float hpAmount { get { return hp / maxHp; } }
     private void OnEnable()
     {
         hp = maxHp;
@@ -50,9 +41,6 @@ public class Unit : MonoBehaviour
         }
         poolManager = FindAnyObjectByType<PoolManager>();
     }
-
-
-
     private float preDamageTime = 0;
     private void Update()
     {
@@ -67,53 +55,15 @@ public class Unit : MonoBehaviour
             }
         }
     }
-
     private void Battle()
     {
         Collider2D[] colls = Physics2D.OverlapBoxAll((Vector2)transform.position + offset, offsetSize, 0, targetLayer);
-
-        //List<Unit> targets = null;
-
         if (colls.Length == 0)
         {
             isBattle = false;
             return;
         }
         else { isBattle = true; }
-        #region 강사님 1안
-        //else
-        //{
-        //    targets = new List<Collider2D>(colls).ConvertAll((x) => x.GetComponent<Unit>());
-        //}
-
-
-        //if (singleAttackType)
-        //{
-        //    FindTarget(colls);
-        //}
-        //else
-        //{
-        //if (targets != null)
-        //{
-        //    targets.Sort((a, b) =>
-        //    {
-        //        return (int)Mathf.Sign(b.hp - a.hp);
-        //    });
-        //}
-
-        //if (singleAttackType && colls.Length != 0)
-        //{
-        //    targets[0].TakeDamage(damage);
-        //}
-        //else
-        //{
-        //    if (colls.Length == 0) return;
-        //    foreach (var target in targets)
-        //    {
-        //        target.TakeDamage(damage);
-        //    }
-        //}
-        #endregion
         if (singleAttackType)
         {
             Unit target = null;
@@ -133,7 +83,6 @@ public class Unit : MonoBehaviour
                 }
             }
             target.TakeDamage(damage);
-
         }
         else
         {
@@ -142,70 +91,23 @@ public class Unit : MonoBehaviour
             {
                 coll.GetComponent<Unit>().TakeDamage(damage);
             }
-
         }
-
         Attack();
-
-        #region 내가한거
-        //foreach (var coll in colls)
-        //{
-        //    if (coll.TryGetComponent<Unit>(out Unit unit))
-        //    {
-        //        isBattle = true;
-        //        if (targetList.Contains(unit) == false)
-        //        { targetList.Add(unit); }
-        //        Attack();
-        //        if (unit.hp - damage <= 0)
-        //        {
-        //            targetList.Remove(unit);
-        //        }
-        //        unit.TakeDamage(damage, unit);
-        //    }
-        //}
-        //print($"{name} : {targetList.Count}");
-        //}
-        #endregion
     }
-
-    #region 내가한거
-    //float targetHp;
-    //float nextTargetHp;
-    //private void FindTarget(Collider2D[] colls)
-    //{
-    //    foreach (var coll in colls)
-    //    {
-    //        if (coll.TryGetComponent<Unit>(out Unit unit))
-    //        {
-
-    //            if (unit.hp > targetHp)
-    //            {
-    //                targetHp = unit.hp;
-    //            }
-    //        }
-    //    }
-    //}
-    #endregion
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube((Vector2)transform.position + offset, offsetSize);
     }
-
     private void Move()
     {
         if (isBattle == true) return;
         transform.Translate(new Vector2(-0.15f, 0) * moveSpeed * Time.deltaTime);
     }
-
-
     public void Attack()
     {
-
         monster.Attack();
-
     }
-
     private void Die()
     {
         if (hp <= 0)
@@ -213,7 +115,6 @@ public class Unit : MonoBehaviour
             hurtBox.enabled = false;
             if (gameObject.CompareTag("Unit"))
                 monster.SetState(MonsterState.Death);
-
             StartCoroutine(Despawn(this, 2f));
             if (gameObject.CompareTag("Base"))
             {

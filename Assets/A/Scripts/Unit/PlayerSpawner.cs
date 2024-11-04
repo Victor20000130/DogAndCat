@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerSpawner : EnemySpawner
 {
-
-
-
     public void Spawn(int num)
     {
         var obj = poolManager.Pop(unitPrefabs[num].name);
@@ -17,10 +14,8 @@ public class PlayerSpawner : EnemySpawner
         GameManager.Instance.player.coins -= obj.unitCost;
         UIManager.Instance.SpawnEnDisAble();
     }
-
     protected override void PutStats(Unit unit, UnitStats stats)
     {
         base.PutStats(unit, stats);
     }
-
 }

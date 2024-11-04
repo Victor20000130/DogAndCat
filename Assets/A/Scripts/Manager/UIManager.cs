@@ -9,32 +9,23 @@ public class UIManager : SingletonManager<UIManager>
 {
     public Canvas mainCanvas;
     public GameObject pausePanel;
-
     public GameObject playerPanel;
-
     public TMP_Text coinText;
     public TMP_Text levelUpText;
     public Button levelUpButton;
     private TextMeshProUGUI levelupButtonText;
     public Button extraSkillButton;
     private TextMeshProUGUI extraSkillButtonText;
-
     public Button[] spawnButtons;
     public GameObject[] grayPanel;
-
     public GameObject[] battleResult;
-
     private bool isPaused = false;
-
-
     protected override void Awake()
     {
         base.Awake();
         levelupButtonText = levelUpButton.transform.GetComponentInChildren<TextMeshProUGUI>();
         extraSkillButtonText = extraSkillButton.transform.GetComponentInChildren<TextMeshProUGUI>();
-
     }
-
     private void Start()
     {
         pausePanel.SetActive(false);
@@ -43,7 +34,6 @@ public class UIManager : SingletonManager<UIManager>
             battleResult[i].SetActive(false);
         }
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -54,7 +44,6 @@ public class UIManager : SingletonManager<UIManager>
             Time.timeScale = isPaused ? 0f : 1f;
         }
     }
-
     public void SpawnEnDisAble()
     {
         for (int i = 0; i < spawnButtons.Length; i++)
@@ -90,18 +79,13 @@ public class UIManager : SingletonManager<UIManager>
             extraSkillButton.interactable = false;
             extraSkillButtonText.color = Color.gray;
         }
-
-
     }
-
     public void OnRestart()
     {
         Start();
     }
-
     private void Reset()
     {
         pausePanel = transform.Find("PausePanel")?.gameObject;
     }
-
 }
