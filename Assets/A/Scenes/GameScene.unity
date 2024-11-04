@@ -2662,9 +2662,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units:
-  - {fileID: 5392777681050664804, guid: cd0c174762763c64e997a346f7d47572, type: 3}
-  - {fileID: 3278228420507946598, guid: 118339cbdb1a693488236542e998e850, type: 3}
-  - {fileID: 4440183786819431593, guid: 8885bcb67cc85eb45a29b28f51f7f82c, type: 3}
+  - {fileID: 5392777681050664804, guid: 1d4d75e1372ac694e856f2299661a42f, type: 3}
+  - {fileID: 3278228420507946598, guid: 61f7ada9c6c7b00418c1bb3ab8af9b55, type: 3}
+  - {fileID: 4440183786819431593, guid: d63194f7a6652cf4a82b2670407d7dd4, type: 3}
   - {fileID: 6060735555739142343, guid: 7135449eb0f9a8f46bc1da1aa4636e10, type: 3}
   - {fileID: 2642094870834351254, guid: b1007a7aaf7af814fb521594de41fd8d, type: 3}
   - {fileID: 6459890774845570308, guid: 7b1ebb2a4f522864cbf7cfb8b35bddd9, type: 3}
@@ -69608,9 +69608,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefabs:
-  - {fileID: 5392777681050664804, guid: cd0c174762763c64e997a346f7d47572, type: 3}
-  - {fileID: 3278228420507946598, guid: 118339cbdb1a693488236542e998e850, type: 3}
-  - {fileID: 4440183786819431593, guid: 8885bcb67cc85eb45a29b28f51f7f82c, type: 3}
+  - {fileID: 5392777681050664804, guid: 1d4d75e1372ac694e856f2299661a42f, type: 3}
+  - {fileID: 3278228420507946598, guid: 61f7ada9c6c7b00418c1bb3ab8af9b55, type: 3}
+  - {fileID: 4440183786819431593, guid: d63194f7a6652cf4a82b2670407d7dd4, type: 3}
   unitStats:
   - moveSpeed: 10
     attackPerSec: 1
