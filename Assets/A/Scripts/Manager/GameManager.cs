@@ -27,25 +27,6 @@ public class GameManager : SingletonManager<GameManager>
             playerSpawner = FindAnyObjectByType<PlayerSpawner>();
         };
     }
-    private void Update()
-    {
-        //if (player == null)
-        //{
-        //    player = FindAnyObjectByType<Player>();
-        //}
-        //if (enemySpawner == null)
-        //{
-        //    enemySpawner = FindAnyObjectByType<EnemySpawner>();
-        //}
-        //if (playerSpawner == null)
-        //{
-        //    playerSpawner = FindAnyObjectByType<PlayerSpawner>();
-        //}
-        //if (uiManager == null)
-        //{
-        //    uiManager = FindAnyObjectByType<UIManager>();
-        //}
-    }
     public void GameStart()
     {
         SceneManager.LoadScene("GameScene");
