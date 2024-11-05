@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < unitPrefabs.Length; i++)
         {
-            if (unitStats[i].spawnStartTime <= Time.time)
+            if (unitStats[i].spawnStartTime <= Time.timeSinceLevelLoad)
             {
                 var obj = poolManager.Pop(unitPrefabs[i].name);
                 PutStats(obj, unitStats[i]);

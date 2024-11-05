@@ -5,34 +5,35 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : SingletonManager<UIManager>
+public class UIManager : MonoBehaviour
 {
     public Canvas mainCanvas;
     public GameObject pausePanel;
     public GameObject playerPanel;
-    public TMP_Text coinText;
-    public TMP_Text levelUpText;
+    public Slider playerHpBar;
+    public Slider enemyHpBar;
+    public GameObject coinPanel;
+    public TextMeshProUGUI coinText;
     public Button levelUpButton;
-    private TextMeshProUGUI levelupButtonText;
+    public TextMeshProUGUI levelupButtonText;
     public Button extraSkillButton;
-    private TextMeshProUGUI extraSkillButtonText;
+    public TextMeshProUGUI extraSkillButtonText;
     public Button[] spawnButtons;
     public GameObject[] grayPanel;
     public GameObject[] battleResult;
     private bool isPaused = false;
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-        levelupButtonText = levelUpButton.transform.GetComponentInChildren<TextMeshProUGUI>();
-        extraSkillButtonText = extraSkillButton.transform.GetComponentInChildren<TextMeshProUGUI>();
+        //levelupButtonText = levelUpButton.transform.GetComponentInChildren<TextMeshProUGUI>();
+        //extraSkillButtonText = extraSkillButton.transform.GetComponentInChildren<TextMeshProUGUI>();
+        //coinText = coinPanel.transform.GetComponentInChildren<TMP_Text>();
+
     }
     private void Start()
     {
         pausePanel.SetActive(false);
-        for (int i = 0; i < battleResult.Length; i++)
-        {
-            battleResult[i].SetActive(false);
-        }
+        battleResult[0].SetActive(false);
+        battleResult[1].SetActive(false);
     }
     private void Update()
     {
@@ -40,7 +41,6 @@ public class UIManager : SingletonManager<UIManager>
         {
             isPaused = !isPaused;
             pausePanel.SetActive(isPaused);
-            Debug.Log(isPaused);
             Time.timeScale = isPaused ? 0f : 1f;
         }
     }
@@ -86,6 +86,10 @@ public class UIManager : SingletonManager<UIManager>
     }
     private void Reset()
     {
+        mainCanvas = GetComponent<Canvas>();
         pausePanel = transform.Find("PausePanel")?.gameObject;
+        playerPanel = transform.Find("PlayerPanel")?.gameObject;
+        coinPanel = transform.Find("CoinPanel")?.gameObject;
     }
+
 }

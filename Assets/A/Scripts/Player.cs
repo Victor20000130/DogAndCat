@@ -15,20 +15,24 @@ public class Player : MonoBehaviour
     public int nextLevelPerCost = 40;
     public int maxLv = 7;
     public int extraSkillColldown = 60;
-    public float coinIncreaseInterval;
-    public float coinDisplayDuration;
+    public float coinIncreaseInterval = 1f;
+    public float coinDisplayDuration = 0.3f;
     private float coinIncreasedTime;
     private float displayCoin = 0f;
     public LayerMask extraSkillTarget;
     public Vector2 extraSkillRangeMin;
     public Vector2 extraSkillRangeMax;
+    private float glitterDuration = 0.5f;
+
     private void Start()
     {
         StartCoroutine(CoinTimer());
+        StartCoroutine(Glitter());
     }
     private void Update()
     {
-        UIManager.Instance.SpawnEnDisAble();
+        GameManager.Instance.uiManager.SpawnEnDisAble();
+
         if (Time.time > coinIncreasedTime)
         {
             coins += getCoinVal;
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
             }
             extraSkillColldown--;
         }
+
     }
     private IEnumerator CoinTimer()
     {
@@ -49,7 +54,7 @@ public class Player : MonoBehaviour
             while (Time.time < endTime)
             {
                 displayCoin = Mathf.Lerp(coins, displayCoin, (endTime - Time.time) / coinDisplayDuration);
-                UIManager.Instance.coinText.text = displayCoin.ToString("n0") + " / " + coinsLimit.ToString();
+                GameManager.Instance.uiManager.coinText.text = displayCoin.ToString("n0") + " / " + coinsLimit.ToString();
                 yield return null;
             }
             yield return new WaitUntil(IsTime);
@@ -66,8 +71,8 @@ public class Player : MonoBehaviour
         level++;
         coinsLimit += levelPerCoinLimit;
         getCoinVal += levelPerCoin;
-        UIManager.Instance.SpawnEnDisAble();
-        UIManager.Instance.levelUpText.text = "Lv. " + level.ToString() + "\n" + "Level UP!\n" + levelUpCost.ToString() + " ¿ø";
+        GameManager.Instance.uiManager.SpawnEnDisAble();
+        GameManager.Instance.uiManager.levelupButtonText.text = "Lv. " + level.ToString() + "\n" + "Level UP!\n" + levelUpCost.ToString() + " ¿ø";
     }
     private void OnDrawGizmos()
     {
@@ -77,12 +82,34 @@ public class Player : MonoBehaviour
     public void ExtraSkill()
     {
         extraSkillColldown = 60;
-        UIManager.Instance.SpawnEnDisAble();
+        GameManager.Instance.uiManager.SpawnEnDisAble();
         Collider2D[] colls = Physics2D.OverlapBoxAll(new Vector2(-25, -10), new Vector2(50, 20), 0, extraSkillTarget);
         foreach (var coll in colls)
         {
             if (coll.CompareTag("Base")) continue;
             coll.GetComponent<Unit>().TakeDamage(100);
+        }
+    }
+    private IEnumerator Glitter()
+    {
+        while (true)
+        {
+            float glitterTime = Time.time + glitterDuration;
+            while (Time.time < glitterTime)
+            {
+                if (coins >= levelUpCost && level != maxLv)
+                {
+                    GameManager.Instance.uiManager.levelUpButton.image.color = new Color(1, 1, 1, Mathf.PingPong(Time.time * 10, 1));
+                }
+                if (extraSkillColldown <= 0)
+                {
+                    GameManager.Instance.uiManager.extraSkillButton.image.color = new Color(1, 1, 1, Mathf.PingPong(Time.time * 10, 1));
+                }
+                yield return null;
+            }
+            GameManager.Instance.uiManager.levelUpButton.image.color = new Color(1, 1, 1, 1);
+            GameManager.Instance.uiManager.extraSkillButton.image.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

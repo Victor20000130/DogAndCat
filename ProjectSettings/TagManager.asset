@@ -10,7 +10,8 @@ TagManager:
   - Hurtbox
   - Hitbox
   - Unit
-  - Base
+  - PlayerBase
+  - EnemyBase
   layers:
   - Default
   - TransparentFX
@@ -60,6 +61,12 @@ TagManager:
   - name: Unit
     uniqueID: 2483261131
     locked: 0
-  - name: hpBar
+  - name: HpBar
     uniqueID: 1391584893
+    locked: 0
+  - name: Die
+    uniqueID: 1160371035
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 3546492775
     locked: 0

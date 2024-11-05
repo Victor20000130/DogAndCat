@@ -26,20 +26,25 @@ public class Unit : MonoBehaviour
     public Slider hpBar;
     private BoxCollider2D hurtBox;
     public TMP_Text tMP_Text;
+    public GameObject dieEffect;
     public float hpAmount { get { return hp / maxHp; } }
+    private void Awake()
+    {
+        hurtBox = GetComponent<BoxCollider2D>();
+        poolManager = FindAnyObjectByType<PoolManager>();
+    }
     private void OnEnable()
     {
         hp = maxHp;
         isBattle = false;
-
-        hurtBox = GetComponent<BoxCollider2D>();
         hurtBox.enabled = true;
         if (gameObject.CompareTag("Unit"))
         {
             monster = GetComponent<Monster>();
             monster.SetState(MonsterState.Run);
+            dieEffect.gameObject.SetActive(false);
+            dieEffect.transform.position = transform.position;
         }
-        poolManager = FindAnyObjectByType<PoolManager>();
     }
     private float preDamageTime = 0;
     private void Update()
@@ -86,7 +91,6 @@ public class Unit : MonoBehaviour
         }
         else
         {
-
             foreach (var coll in colls)
             {
                 coll.GetComponent<Unit>().TakeDamage(damage);
@@ -113,28 +117,23 @@ public class Unit : MonoBehaviour
         if (hp <= 0)
         {
             hurtBox.enabled = false;
+            isBattle = true;
             if (gameObject.CompareTag("Unit"))
+            {
                 monster.SetState(MonsterState.Death);
-            StartCoroutine(Despawn(this, 2f));
+                dieEffect.SetActive(true);
+
+                StartCoroutine(Despawn(this, 2f));
+            }
             if (gameObject.CompareTag("Base"))
             {
-                if (gameObject.layer == 3)
-                {
-                    UIManager.Instance.battleResult[0].SetActive(true);
-                }
-                if (gameObject.layer == 6)
-                {
-                    UIManager.Instance.battleResult[1].SetActive(true);
-                }
-                Time.timeScale = 0;
-                GameManager.Instance.GameOver();
+                StartCoroutine(EndGame());
             }
         }
     }
     public void TakeDamage(float damage)
     {
         hp -= damage;
-        isBattle = true;
         if (transform.CompareTag("Base"))
         {
             tMP_Text.text = hp.ToString() + " / " + maxHp.ToString();
@@ -143,7 +142,30 @@ public class Unit : MonoBehaviour
     }
     public IEnumerator Despawn(Unit unit, float t)
     {
-        yield return new WaitForSeconds(t);
+        float dieTime = Time.time + t;
+        while (Time.time <= dieTime)
+        {
+            dieEffect.transform.Translate(new Vector2(0, 1f) * 10 * Time.deltaTime);
+            yield return null;
+        }
         poolManager.Push(unit);
+    }
+    public IEnumerator EndGame()
+    {
+        while (true)
+        {
+            if (gameObject.layer == 3)
+            {
+                GameManager.Instance.uiManager.battleResult[0].SetActive(true);
+            }
+            if (gameObject.layer == 6)
+            {
+                GameManager.Instance.uiManager.battleResult[1].SetActive(true);
+            }
+            yield return new WaitForSeconds(3f);
+            GameManager.Instance.uiManager.OnRestart();
+            GameManager.Instance.GameOver();
+
+        }
     }
 }

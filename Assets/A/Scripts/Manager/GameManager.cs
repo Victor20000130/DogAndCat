@@ -12,24 +12,39 @@ public class GameManager : SingletonManager<GameManager>
     internal Player player;
     internal EnemySpawner enemySpawner;
     internal PlayerSpawner playerSpawner;
+    internal UIManager uiManager;
     protected override void Awake()
     {
         base.Awake();
     }
+    private void Start()
+    {
+        SceneManager.sceneLoaded += (x, y) =>
+        {
+            uiManager = FindAnyObjectByType<UIManager>();
+            player = FindAnyObjectByType<Player>();
+            enemySpawner = FindAnyObjectByType<EnemySpawner>();
+            playerSpawner = FindAnyObjectByType<PlayerSpawner>();
+        };
+    }
     private void Update()
     {
-        if (player == null)
-        {
-            player = FindAnyObjectByType<Player>();
-        }
-        if (enemySpawner == null)
-        {
-            enemySpawner = FindAnyObjectByType<EnemySpawner>();
-        }
-        if (playerSpawner == null)
-        {
-            playerSpawner = FindAnyObjectByType<PlayerSpawner>();
-        }
+        //if (player == null)
+        //{
+        //    player = FindAnyObjectByType<Player>();
+        //}
+        //if (enemySpawner == null)
+        //{
+        //    enemySpawner = FindAnyObjectByType<EnemySpawner>();
+        //}
+        //if (playerSpawner == null)
+        //{
+        //    playerSpawner = FindAnyObjectByType<PlayerSpawner>();
+        //}
+        //if (uiManager == null)
+        //{
+        //    uiManager = FindAnyObjectByType<UIManager>();
+        //}
     }
     public void GameStart()
     {
@@ -37,9 +52,15 @@ public class GameManager : SingletonManager<GameManager>
     }
     public void GameOver()
     {
+
+        for (int i = 0; i < uiManager.battleResult.Length; i++)
+        {
+            uiManager.battleResult[i].SetActive(false);
+        }
         units.Clear();
         enemise.Clear();
         p_unit.Clear();
         SceneManager.LoadScene("GameStartScene");
+
     }
 }
